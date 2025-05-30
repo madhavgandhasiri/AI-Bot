@@ -19,6 +19,21 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+  const handleBeforeUnload = () => {
+    if (chatHistory.length > 0) {
+      saveConversation(false);
+    }
+  };
+
+  window.addEventListener("beforeunload", handleBeforeUnload);
+
+  return () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+  };
+}, [chatHistory]);
+
+
+  useEffect(() => {
     const isNewChat = sessionStorage.getItem("newChatClicked");
 
     if (!isNewChat) {
@@ -127,11 +142,12 @@ function Home() {
       <aside
         className={`${styles.sideBar} ${showSidebar ? styles.showSidebar : ""}`}
       >
-        <div className={styles.newChat} onClick={handleNewChat}>
+        <Link to="/" className={styles.newChat} onClick={handleNewChat}>
           <img className={styles.botAIImg} src={botIcon} alt="Bot Icon" />
           <span>New Chat</span>
           <FaRegEdit className={styles.editIcon} />
-        </div>
+        </Link>
+
         <Link to="/history" className={styles.pastConv}>
           Past Conversations
         </Link>
