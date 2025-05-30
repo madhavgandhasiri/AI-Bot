@@ -176,7 +176,7 @@ function Home() {
 
         <div className={styles.inputDiv}>
           <input
-            placeholder="Message Bot AI…"
+            placeholder="Message Bot AI..."
             type="text"
             value={input}
             onChange={handleInput}
