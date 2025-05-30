@@ -1,0 +1,24 @@
+.questionCardContainer{
+  background-color: #ffffff;
+  width: 28rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1030px) {
+  .questionCardContainer{
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .questionCardContainer{
+    width: auto;
+  }
+}

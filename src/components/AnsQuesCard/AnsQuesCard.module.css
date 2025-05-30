@@ -1,0 +1,32 @@
+.card {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 8px 0;
+  display: flex;
+  width: 95%;
+  background-color: #900aef21;
+  
+  gap: 1rem;
+}
+
+.card img{
+  border-radius: 50%;
+}
+
+.userCard,
+.botCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.userCard {
+  align-self: flex-start;
+  width: 90%;
+  
+}
+
+.botCard {
+  align-self: flex-start;
+  width: 90%;
+}
