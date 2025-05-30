@@ -5,19 +5,30 @@ import { FaRegEdit, FaBars } from "react-icons/fa";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import sampleData from "../../data/sampleData.json";
 import AnsQuesCard from "../../components/AnsQuesCard/AnsQuesCard";
+import { useNavigate } from "react-router-dom";
+import { HiOutlineLightBulb } from "react-icons/hi";
+import { RxCross2 } from "react-icons/rx";
 
 function Home() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [input, setInput] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+  const [openDialogBox, setOpenDialogBox] = useState(false);
+  const [feedback, setFeedback] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const stored = localStorage.getItem("conversations");
-    if (stored) {
-      const conversations = JSON.parse(stored);
-      const lastConversation = conversations[conversations.length - 1];
-      if (lastConversation) {
-        setChatHistory(lastConversation.messages);
+    const isNewChat = sessionStorage.getItem("newChatClicked");
+
+    if (!isNewChat) {
+      const stored = localStorage.getItem("conversations");
+      if (stored) {
+        const conversations = JSON.parse(stored);
+        const lastConversation = conversations[conversations.length - 1];
+        if (lastConversation) {
+          setChatHistory(lastConversation.messages);
+        }
       }
     }
   }, []);
@@ -61,7 +72,7 @@ function Home() {
     }
   }
 
-  function saveConversation() {
+  function saveConversation(includeFeedback = true) {
     const stored = localStorage.getItem("conversations");
     const allConversations = stored ? JSON.parse(stored) : [];
 
@@ -71,24 +82,40 @@ function Home() {
       messages: chatHistory,
     };
 
+    if (includeFeedback && feedback.trim()) {
+      newConversation.feedback = feedback.trim();
+    }
+
     allConversations.push(newConversation);
     localStorage.setItem("conversations", JSON.stringify(allConversations));
+
     return newConversation.id;
   }
 
   function handleNewChat() {
-    if (chatHistory.length > 0) {
-      const id = saveConversation();
-      alert(`Conversation ${id} saved!`);
-    }
-    setChatHistory([]);
-    setInput("");
+    if (chatHistory.length === 0) return;
+    setOpenDialogBox((prev) => !prev);
   }
 
   function handleSaveChat() {
     if (chatHistory.length === 0) return;
-    const id = saveConversation();
-    alert(`Conversation ${id} saved!`);
+    setOpenDialogBox((prev) => !prev);
+  }
+
+  function handleHistory() {
+    navigate("/history");
+  }
+
+  function handleDialogClose() {
+    setOpenDialogBox(false);
+  }
+
+  function handleSubmitFeedback() {
+    saveConversation(true);
+    setFeedback("");
+    setOpenDialogBox(false);
+    setChatHistory([]);
+    alert("Feedback submitted and conversation saved!");
   }
 
   return (
@@ -105,7 +132,9 @@ function Home() {
           <span>New Chat</span>
           <FaRegEdit className={styles.editIcon} />
         </div>
-        <button className={styles.pastConv}>Past Conversations</button>
+        <button className={styles.pastConv} onClick={handleHistory}>
+          Past Conversations
+        </button>
       </aside>
 
       <main
@@ -161,6 +190,28 @@ function Home() {
           </button>
         </div>
       </main>
+      {openDialogBox ? (
+        <div className={styles.overlay}>
+          <div className={styles.dialogContainer}>
+            <div className={styles.titleDiv}>
+              <HiOutlineLightBulb size={26} />
+              <p>Provide Additional Feedback</p>
+              <RxCross2 className={styles.cross} onClick={handleDialogClose} />
+            </div>
+            <div>
+              <input
+                type="text"
+                autoFocus
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+              />
+            </div>
+            <div className={styles.dialogbtn}>
+              <button onClick={handleSubmitFeedback}>Submit</button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -5,7 +5,14 @@
   display: flex;
   width: 95%;
   background-color: #900aef21;
-  
+  gap: 1rem;
+}
+
+.cardHistory{
+  padding: 10px;
+  display: flex;
+  width: 95%;
+  background-color: #900aef21;
   gap: 1rem;
 }
 

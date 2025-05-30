@@ -3,9 +3,9 @@ import styles from "./AnsQuesCard.module.css";
 import botImg from "../../assets/images/botIcon.png";
 import userImg from "../../assets/images/user.png";
 
-function AnsQuesCard({ question, isUser, time }) {
+function AnsQuesCard({ question, isUser, time, fromHistory }) {
   return (
-    <div className={styles.card}>
+    <div className={`${fromHistory ? styles.cardHistory : styles.card}`}>
       <div>
         <img src={isUser ? userImg : botImg} alt={isUser ? "User" : "AI Bot"} />
       </div>

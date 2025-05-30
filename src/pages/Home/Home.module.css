@@ -129,6 +129,73 @@
   display: none;
 }
 
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.dialogContainer{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #FAF7FF;
+  height: 12rem;
+  width: 25rem;
+  border-radius: 8px;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+.titleDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem;
+}
+
+.titleDiv p{
+  margin-right: 6rem;
+}
+
+.cross:hover{
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 50%;
+}
+
+.dialogContainer input{
+  height: 7rem;
+  width: 22rem;
+  border-radius: 8px;
+  border: 1px solid gray;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.dialogbtn{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  padding-right: 1.5rem;
+}
+
+.dialogContainer button{
+  padding: 0.3rem 1.2rem;
+  cursor: pointer;
+  background-color: #D7C7F4;
+  border: none;
+  border-radius: 5px;
+}
+
 @media (max-width: 768px) {
 
   .title{
@@ -184,4 +251,40 @@
   }
 }
 
+@media (max-width: 768px) {
+  .dialogContainer {
+    width: 90%;
+    padding: 1rem;
+    border-radius: 8px;
+    height: auto;
+    display: flex;
+    gap: 0.5rem;
+  }
 
+  .titleDiv {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .titleDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem;
+}
+
+  .dialogbtn {
+    justify-content: center;
+  }
+
+  .dialogContainer input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    box-sizing: border-box;
+    height: 5rem;
+    width: auto;
+  }
+}
