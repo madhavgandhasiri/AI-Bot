@@ -10,7 +10,7 @@ function AnsQuesCard({ question, isUser, time, fromHistory }) {
         <img src={isUser ? userImg : botImg} alt={isUser ? "User" : "AI Bot"} />
       </div>
       <div className={`${isUser ? styles.userCard : styles.botCard}`}>
-        <h5>{isUser ? "You" : "Soul AI"}</h5>
+        <span className={styles.username}>{isUser ? "You" : "Soul AI"}</span>
         <p>{question}</p>
         <p className={styles.time}>{time}</p>
       </div>

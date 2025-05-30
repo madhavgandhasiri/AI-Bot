@@ -49,7 +49,7 @@ function Home() {
     );
     const answer = matchedData
       ? matchedData.response
-      : "Sorry, did not understand your query!";
+      : "Sorry, Did not understand your query!";
 
     const time = new Date().toLocaleTimeString([], {
       hour: "2-digit",
@@ -142,9 +142,9 @@ function Home() {
           chatHistory.length > 0 ? styles.chatBoxConv : ""
         }`}
       >
-        <div className={styles.title}>
+        <header className={styles.title}>
           <h2>Bot AI</h2>
-        </div>
+        </header>
 
         {chatHistory.length === 0 ? (
           <>

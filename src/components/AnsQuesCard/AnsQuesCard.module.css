@@ -8,7 +8,7 @@
   gap: 1rem;
 }
 
-.cardHistory{
+.cardHistory {
   padding: 10px;
   display: flex;
   width: 95%;
@@ -16,7 +16,7 @@
   gap: 1rem;
 }
 
-.card img{
+.card img {
   border-radius: 50%;
 }
 
@@ -30,10 +30,14 @@
 .userCard {
   align-self: flex-start;
   width: 90%;
-  
 }
 
 .botCard {
   align-self: flex-start;
   width: 90%;
+}
+
+.username {
+  font-weight: 700;
+  font-size: 1rem;
 }
