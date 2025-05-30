@@ -5,7 +5,7 @@ import { FaRegEdit, FaBars } from "react-icons/fa";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import sampleData from "../../data/sampleData.json";
 import AnsQuesCard from "../../components/AnsQuesCard/AnsQuesCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 
@@ -132,9 +132,9 @@ function Home() {
           <span>New Chat</span>
           <FaRegEdit className={styles.editIcon} />
         </div>
-        <button className={styles.pastConv} onClick={handleHistory}>
+        <Link to="/history" className={styles.pastConv}>
           Past Conversations
-        </button>
+        </Link>
       </aside>
 
       <main
@@ -143,7 +143,7 @@ function Home() {
         }`}
       >
         <header className={styles.title}>
-          <h2>Bot AI</h2>
+          <h1>Bot AI</h1>
         </header>
 
         {chatHistory.length === 0 ? (
@@ -174,21 +174,26 @@ function Home() {
           </div>
         )}
 
-        <div className={styles.inputDiv}>
+        <form
+          className={styles.inputDiv}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAsk();
+          }}
+        >
           <input
             placeholder="Message Bot AI..."
             type="text"
             value={input}
             onChange={handleInput}
-            onKeyDown={handleKeyDown}
           />
-          <button className={styles.btn} type="submit" onClick={handleAsk}>
+          <button className={styles.btn} type="submit">
             Ask
           </button>
           <button className={styles.btn} type="button" onClick={handleSaveChat}>
             Save
           </button>
-        </div>
+        </form>
       </main>
       {openDialogBox ? (
         <div className={styles.overlay}>
